@@ -1,36 +1,47 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: ¡Dale un estilo único!
+description: Tarjetas personalizadas para bots de Discord
 template: splash
 hero:
   tagline: Congrats on setting up a new Starlight project!
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/preview.png
   actions:
-    - text: Example Guide
+    - text: Documentación
       link: /guides/example/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: Servidor de Discord
+      link: https://discord.gg/YqUkagNPaw
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid } from "@astrojs/starlight/components";
 
-## Next steps
+## Empezar es tán fácil como
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+  <Card title="Instalarlo en tu proyecto" icon="node">
+    Utiliza nuestro [NPM oficial de
+    CustomCards](https://www.npmjs.com/package/custom-cards) en tu proyecto.
+  </Card>
+  <Card title="Solicitar tu token" icon="discord">
+    Entra a nuestro [servidor de
+    Discord](https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData)
+    y sigue los pasos para generar tu token. ¡Es gratis y no toma mucho!
+  </Card>
+  <Card title="Leer la documentación" icon="open-book">
+    Para facilitar el uso de **CustomCards**, hemos creado una
+    [documentación](/guides/example) detallada y fácil de entender.
+  </Card>
 </CardGrid>
+
+## Sobre nosotros
+
+Este proyecto fue creado por [**Yasu Yumiko**](https://yumikodev.vercel.app) (Edwin J.) el 9 Octubre 2022 con la finalidad de poder crear imágenes personalizadas para usarse en bots de Discord. Un sueño bastante genial para él, pode empaquetar su código y que otros puedan usarlo con la mayor libertad posible como si lo estuvieran haciendo desde cero, pero quitando la complejidad que realmente hay por debajo.
+
+Aunque todo pudo mantenerse en un simple NPM, al explorar otros entornos de JavaScript (Bun, Deno, etc) notó la incompatibilidad con las dependencias del proyecto y que incluso estas podían darse en sistemas fuera de Linux. Su solución fué mover toda esta complejidad a una API y cambiar la generación de las tarjetas en solicitudes `POST` a un endpoint.
+
+Todo funcionaba bien al inicio, pero lo que complicó las cosas fue su carencia económica para pagar un buen hosting 24/7 y su falta de conocimientos para mantener una buena API. (Tenía 14 años en ese entonces y aún con 16, a la fecha que escribo esto, me falta dinero 🥲)
+
+Después de casi 3 años (10 Enero 2025), se lanzó oficialmente la versión 2 de la API que trajo muchas novedades estupendas y un plan para poder hacer mantenible este proyecto.

@@ -1,0 +1,76 @@
+---
+title: API
+description: Documentación sobre la API de CustomCards.
+---
+
+import { Badge, LinkCard } from "@astrojs/starlight/components";
+
+Aquí se detallará toda la información sobre la API de CustomCards.
+
+:::note
+Es importante destacar que esta documentación se centrará en las versiones 2 y posteriores debido a que la versión 1 será deprecada (y dejará de ser accesible) una semana después de la publicación de la versión 2.
+:::
+
+## URL Base
+
+Las solicitudes que se hagan hacia la API deben realizarse a la siguiente URL:
+
+```http
+https://custom-cards.koyeb.app/v{VERSION}
+```
+
+`{VERSION}` debe ser reemplazado por el número de la versión que se desea utilizar. Por ejemplo, si deseas usar la versión `1` debes especificarlo en la ruta:
+
+```http
+https://custom-cards.koyeb.app/v1
+```
+
+## Versión 2 (actual)
+
+La versión `2` introdujo características que antes estaban limitadas por el diseño de la versión `1`. Por lo tanto, para poder aprovechar estas características, es necesario tener en cuenta la forma en la que debemos hacer una petición a la API.
+
+### Tipo de contenido
+
+Comumente se usa el encabezado `Content-Type: application/json` para enviar información al servidor en formato JSON, pero la realidad es que la Version 2 introdujo la capacidad de enviar archivos locales (anteriormente sólo se admitían URLs). Por lo tanto, a partir de la **versión 2 en adelante**, las solicitudes deberán enviarse con el encabezado `Content-Type: multipart/form-data` y el cuerpo de la solicitud en el respectivo formato ([`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData))
+
+### Autorización
+
+Al momento de hacer una solicitud es normal que obtengas un error [**HTTP 401 Unauthorized**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401), pues para evitar abusos y poder ofrecer muchas más características se implementaron los [Tokens](/reference/tokens). Para evitar este error es necesario **incluir en cada petición** el encabezado `Authorization`.
+
+```http
+Authorization: Bearer <TOKEN>
+```
+
+`<TOKEN>` deberá ser reemplazado por el token de acceso que solicita el usuario dentro del servidor de discord. [(Leer más)](/reference/tokens)
+
+### Variantes
+
+En la versión 2 y posteriores se admitirán más de un estilo de diseño. Significa que este deberá ser el primer campo que se debe encontrar presente en el cuerpo de la solicitud, pues las propiedades usadas en cada estilo podrían cambiar de acuerdo a las necesidades.
+
+```json
+{
+  "variant": "Classic"
+}
+```
+
+Existen 2 nombres de variantes válido, pero su disponibilidad puede cambiar de acuerdo al tipo de tarjeta.
+
+:::note
+Tener en cuenta que las variantes son sensitivas a mayúsculas y minúsculas.
+:::
+
+```ts
+"Classic" | "Revay";
+```
+
+<LinkCard
+  title="Leer más sobre las variantes"
+  description="El contenido sobre las variantes y el cuerpo de cada solicitud se encuentra aquí."
+  href="/reference/variants"
+/>
+
+### Rutas
+
+La versión 2 de CustomCards admite las siguientes rutas, estas estarán acompañadas del respectivo método y cuerpo que se debe usar.
+
+- <Badge variant="success" text="POST" /> [`/cards/welcome`](/reference/variants#tarjetas-de-bienvenida)
