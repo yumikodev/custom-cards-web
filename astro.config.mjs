@@ -39,7 +39,7 @@ export default defineConfig({
           items: [
             { slug: "reference/api-access" },
             { slug: "reference/api" },
-            { slug: "reference/variants" },
+            { slug: "reference/shared-properties" },
           ],
         },
       ],
