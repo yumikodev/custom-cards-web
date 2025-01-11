@@ -3,7 +3,7 @@ title: Acceso
 description: Sobre los tokens de acceso
 ---
 
-Los tokens de Acceso no son más que una medida preventiba y un plan para lograr abusos y volver mantenible este proyecto a largo plazo.
+Los tokens de Acceso no son más que una medida preventiba y un plan para evitar abusos y volver mantenible este proyecto a largo plazo.
 
 Un Acceso es una identificación única para cada usuario que puede ser **creada, actualizada y eliminada** según sea necesario. Cada acceso está relacionado con un `token` que permite consumir de la API sólo a los usuarios que solicitaron su token en nuestro [Servidor de Discord](https://discord.gg/YqUkagNPaw).
 
