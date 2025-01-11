@@ -1,0 +1,13 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { LinkButton } from "@astrojs/starlight/components";
+---
+
+<StarlightPage frontmatter={{ title: "404 Not found" }}>
+  <p class="text-base">
+    ¡Hey! Parece que te perdiste navegando, no se pudo encontrar lo que
+    buscabas.
+  </p>
+
+  <LinkButton href="/" icon="open-book">Regresar al inicio</LinkButton>
+</StarlightPage>

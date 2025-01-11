@@ -1,10 +1,10 @@
-// @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://custom-cards-web.vercel.app",
   integrations: [
     starlight({
       customCss: [
@@ -21,6 +21,7 @@ export default defineConfig({
         baseUrl: "https://github.com/yumikodev/custom-cards-web/edit/main/",
       },
       lastUpdated: true,
+      disable404Route: true,
       sidebar: [
         {
           label: "Guías",

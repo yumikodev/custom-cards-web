@@ -7,8 +7,13 @@ import { Badge, LinkCard } from "@astrojs/starlight/components";
 
 Aquí se detallará toda la información sobre la API de CustomCards.
 
-:::note
-Es importante destacar que esta documentación se centrará en las versiones 2 y posteriores debido a que la versión 1 será deprecada (y dejará de ser accesible) una semana después de la publicación de la versión 2.
+:::caution
+Antes de empezar con la documentación, se deben tener en cuenta las siguientes concideraciones:
+
+1. Es importante destacar que esta documentación se centrará en las versiones 2 y posteriores debido a que la versión 1 será **deprecada** (y dejará de ser accesible) una semana después de la publicación de la versión 2.
+
+2. Se asume que el usuario tiene conocimientos básicos sobre peticiones HTTP, por lo que no se explicarán detalles técnicos como lo que es un Header o métodos HTTP.
+
 :::
 
 ## URL Base
@@ -31,11 +36,15 @@ La versión `2` introdujo características que antes estaban limitadas por el di
 
 ### Tipo de contenido
 
-Comumente se usa el encabezado `Content-Type: application/json` para enviar información al servidor en formato JSON, pero la realidad es que la Version 2 introdujo la capacidad de enviar archivos locales (anteriormente sólo se admitían URLs). Por lo tanto, a partir de la **versión 2 en adelante**, las solicitudes deberán enviarse con el encabezado `Content-Type: multipart/form-data` y el cuerpo de la solicitud en el respectivo formato ([`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData))
+Comumente se usa el header `Content-Type: application/json` para enviar información al servidor en formato JSON, pero la realidad es que la Version 2 introdujo la capacidad de enviar archivos locales (anteriormente sólo se admitían URLs). Por lo tanto, a partir de la **versión 2 en adelante**, las solicitudes deberán enviarse con el header `Content-Type: multipart/form-data` y el cuerpo de la solicitud en el respectivo formato ([`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData))
+
+:::danger
+Algunas veces se puede dar el caso que obtengar un error con la descripción `Missing boundary`, la mejor solución a esto es **eliminar** el header `Content-Type` y que su cliente HTTP lo estableza por usted (como en el caso de `fetch()` con JavaScript).
+:::
 
 ### Autorización
 
-Al momento de hacer una solicitud es normal que obtengas un error [**HTTP 401 Unauthorized**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401), pues para evitar abusos y poder ofrecer muchas más características se implementaron los [Tokens](/reference/tokens). Para evitar este error es necesario **incluir en cada petición** el encabezado `Authorization`.
+Al momento de hacer una solicitud es normal que obtengas un error [**HTTP 401 Unauthorized**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401), pues para evitar abusos y poder ofrecer muchas más características se implementaron los [Tokens](/reference/api-access). Para evitar este error es necesario **incluir en cada petición** el header `Authorization`.
 
 ```http
 Authorization: Bearer <TOKEN>
@@ -45,27 +54,27 @@ Authorization: Bearer <TOKEN>
 
 ### Variantes
 
-En la versión 2 y posteriores se admitirán más de un estilo de diseño. Significa que este deberá ser el primer campo que se debe encontrar presente en el cuerpo de la solicitud, pues las propiedades usadas en cada estilo podrían cambiar de acuerdo a las necesidades.
+En la versión 2 y posteriores se admitirán más de un estilo de diseño. Significa que este deberá ser la **primera propiedad** que se debe encontrar presente en el body de la solicitud, pues las propiedades usadas en cada estilo podrían cambiar de acuerdo a las necesidades.
 
-```json
-{
-  "variant": "Classic"
-}
-```
-
-Existen 2 nombres de variantes válido, pero su disponibilidad puede cambiar de acuerdo al tipo de tarjeta.
+Existen 2 nombres de variantes válidos, pero su disponibilidad puede cambiar de acuerdo al tipo de tarjeta.
 
 :::note
 Tener en cuenta que las variantes son sensitivas a mayúsculas y minúsculas.
 :::
 
-```ts
-"Classic" | "Revay";
+:::danger
+El objetivo de las variantes es poder utilizar más de un estilo sin tener que usar muchas rutas. Cada estilo puede tener sus proias propiedades, por lo que el body no siempre será el mismo para cada estilo, aunque si puede haber propiedades compartidas (propiedades que no cambian sin importar el estilo).
+:::
+
+```ts ""Classic"" ""Revay""
+interface Body {
+  variant: "Classic" | "Revay";
+}
 ```
 
 <LinkCard
   title="Leer más sobre las variantes"
-  description="El contenido sobre las variantes y el cuerpo de cada solicitud se encuentra aquí."
+  description="El contenido sobre las variantes y el body de cada solicitud se encuentra aquí."
   href="/reference/variants"
 />
 
